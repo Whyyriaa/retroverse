@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RetroVerse</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #f3e4cf;
+      color: #3b2416;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4b2e1f, #8b5e3c);
+      color: #fff4df;
+      padding: 35px 20px;
+      text-align: center;
+      border-bottom: 6px double #d4a373;
+    }
+
+    header h1 {
+      font-size: 48px;
+      letter-spacing: 4px;
+      text-shadow: 3px 3px #2a160d;
+    }
+
+    header p {
+      max-width: 800px;
+      margin: 15px auto 0;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    nav {
+      background: #6f4e37;
+      padding: 14px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: #fff4df;
+      text-decoration: none;
+      margin: 0 14px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ffd28f;
+    }
+
+    section {
+      padding: 45px 8%;
+    }
+
+    .titulo {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 25px;
+      color: #4b2e1f;
+    }
+
+    .inicio {
+      background: #ead2b7;
+      text-align: center;
+      border-bottom: 4px solid #c89f72;
+    }
+
+    .inicio-card {
+      background: #fff8ed;
+      padding: 30px;
+      border-radius: 18px;
+      border: 3px solid #8b5e3c;
+      box-shadow: 8px 8px 0 #c89f72;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .filtros {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .filtros button {
+      margin: 6px;
+    }
+
+    button {
+      background: #8b5e3c;
+      color: #fff4df;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #4b2e1f;
+      transform: scale(1.04);
+    }
+
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .producto {
+      background: #fff8ed;
+      border: 3px solid #8b5e3c;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 7px 7px 0 #c89f72;
+      transition: 0.3s;
+    }
+
+    .producto:hover {
+      transform: translateY(-6px);
+    }
+
+    .producto img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 3px solid #c89f72;
+      margin-bottom: 12px;
+    }
+
+    .producto h3 {
+      color: #4b2e1f;
+      margin-bottom: 8px;
+    }
+
+    .producto p {
+      margin: 5px 0;
+      font-size: 15px;
+    }
+
+    .descripcion {
+      background: #ead2b7;
+      padding: 10px;
+      border-left: 5px solid #8b5e3c;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+
+    .botones {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .carrito {
+      background: #ead2b7;
+    }
+
+    .carrito-box, .registro-box, .ayuda-box {
+      max-width: 900px;
+      margin: auto;
+      background: #fff8ed;
+      border: 3px solid #8b5e3c;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 7px 7px 0 #c89f72;
+    }
+
+    .item-carrito {
+      display: flex;
+      justify-content: space-between;
+      background: #ead2b7;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 15px;
+      color: #4b2e1f;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 2px solid #8b5e3c;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #8b5e3c;
+      color: #fff4df;
+    }
+
+    td {
+      background: #fff8ed;
+    }
+
+    .ayuda-box ol {
+      padding-left: 25px;
+      line-height: 1.8;
+    }
+
+    footer {
+      background: #4b2e1f;
+      color: #fff4df;
+      text-align: center;
+      padding: 18px;
+      margin-top: 30px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .modal-contenido {
+      background: #fff8ed;
+      color: #3b2416;
+      padding: 25px;
+      border-radius: 18px;
+      border: 4px solid #8b5e3c;
+      max-width: 450px;
+      width: 90%;
+      box-shadow: 8px 8px 0 #c89f72;
+    }
+
+    .cerrar {
+      float: right;
+      font-size: 25px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 34px;
+      }
+
+      nav a {
+        display: block;
+        margin: 8px 0;
+      }
+
+      table {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>RetroVerse</h1>
+    <p>
+      RetroVerse es una aplicación de e-commerce dedicada a la compra y venta de objetos retro y de colección.
+      Permite explorar productos coleccionables, accesorios temáticos y merchandising especial.
+    </p>
+  </header>
+
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#catalogo">Catálogo</a>
+    <a href="#carrito">Carrito</a>
+    <a href="#registro">Registro</a>
+    <a href="#ayuda">Ayuda</a>
+  </nav>
+
+  <section id="inicio" class="inicio">
+    <div class="inicio-card">
+      <h2 class="titulo">Bienvenido a RetroVerse</h2>
+      <p>
+        Explorá productos vintage relacionados con anime, videojuegos, tecnología retro
+        y objetos de colección. Una tienda para los coleccionistas de corazon.
+      </p>
+    </div>
+  </section>
+
+  <section id="catalogo">
+    <h2 class="titulo">Catálogo de Productos</h2>
+
+    <div class="filtros">
+      <button onclick="filtrarProductos('Todos')">Todos</button>
+      <button onclick="filtrarProductos('Anime')">Anime</button>
+      <button onclick="filtrarProductos('Videojuegos')">Videojuegos</button>
+      <button onclick="filtrarProductos('Colección')">Colección</button>
+    </div>
+
+    <div class="productos" id="listaProductos"></div>
+  </section>
+
+  <section id="carrito" class="carrito">
+    <h2 class="titulo">Carrito de Compras</h2>
+
+    <div class="carrito-box">
+      <div id="itemsCarrito">
+        <p>El carrito está vacío.</p>
+      </div>
+
+      <p class="total" id="totalCarrito">Total: $0</p>
+      <button onclick="vaciarCarrito()">Vaciar carrito</button>
+    </div>
+  </section>
+
+  <section id="registro">
+    <h2 class="titulo">Diseño del Registro Principal</h2>
+
+    <div class="registro-box">
+      <h3>Registro principal: RegVintage</h3>
+
+      <table>
+        <tr>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Descripción</th>
+        </tr>
+        <tr>
+          <td>Cprod</td>
+          <td>Entero</td>
+          <td>Código único del producto. Clave primaria.</td>
+        </tr>
+        <tr>
+          <td>Nombprod</td>
+          <td>AN(50)</td>
+          <td>Nombre del producto.</td>
+        </tr>
+        <tr>
+          <td>Categ</td>
+          <td>AN(30)</td>
+          <td>Categoría del producto.</td>
+        </tr>
+        <tr>
+          <td>Marca</td>
+          <td>AN(30)</td>
+          <td>Marca del producto.</td>
+        </tr>
+        <tr>
+          <td>Precio</td>
+          <td>Real</td>
+          <td>Precio de venta.</td>
+        </tr>
+        <tr>
+          <td>Stock</td>
+          <td>Entero</td>
+          <td>Cantidad disponible.</td>
+        </tr>
+        <tr>
+          <td>Estado</td>
+          <td>AN(20)</td>
+          <td>Estado del producto.</td>
+        </tr>
+        <tr>
+          <td>Vendedor</td>
+          <td>AN(50)</td>
+          <td>Usuario o nombre del vendedor.</td>
+        </tr>
+      </table>
+      <p style="margin-top: 18px; line-height: 1.6;">
+        <strong>Clave del registro:</strong> Cprod. Se eligió este campo porque identifica de manera única cada producto dentro de RetroVerse. Aunque dos productos puedan tener nombres parecidos, cada uno tendrá un código distinto, lo que permite buscar, modificar o eliminar registros sin confusiones.
+      </p>
+
+    </div>
+  </section>
+
+  <section id="ayuda">
+    <h2 class="titulo">Ayuda / Tutorial</h2>
+
+    <div class="ayuda-box">
+      <ol>
+        <li><strong>Explorar productos:</strong> ingresá al catálogo y mirá las tarjetas disponibles.</li>
+        <li><strong>Filtrar productos:</strong> usá los botones Anime, Videojuegos o Colección.</li>
+        <li><strong>Ver detalles:</strong> presioná “Ver detalle” para abrir información ampliada del producto.</li>
+        <li><strong>Agregar al carrito:</strong> presioná “Agregar al carrito” para sumar un producto a la compra.</li>
+        <li><strong>Revisar carrito:</strong> entrá a la sección Carrito para ver productos agregados y total.</li>
+        <li><strong>Ver registro:</strong> en Registro se muestra el diseño del registro principal RegVintage.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <p>RetroVerse © 2026 - E-commerce retro y de colección</p>
+  </footer>
+
+  <div class="modal" id="modal">
+    <div class="modal-contenido">
+      <span class="cerrar" onclick="cerrarModal()">×</span>
+      <div id="detalleProducto"></div>
+    </div>
+  </div>
+
+  <script>
+    const productos = [
+      {
+        cprod: 1,
+        nombre: "Atari 7800 + Lote de 40 juegos",
+        categoria: "Videojuegos",
+        marca: "Atari",
+        precio: 450000,
+        stock: 1,
+        estado: "Usado",
+        vendedor: "@Gamer_retro",
+        imagen: "https://i.ebayimg.com/images/g/qzwAAOSwDphhcGHW/s-l1600.webp",
+        descripcion: "Consola Atari 7800 con desgaste, rasguños y suciedad. Incluye 40 juegos probados, con etiquetas desgastadas, y 2 joysticks con señales de uso."
+      },
+      {
+        cprod: 2,
+        nombre: "Soundtrack de Isidoro: La película",
+        categoria: "Cds",
+        marca: "Leader Music",
+        precio: 78000,
+        stock: 2,
+        estado: "Nuevo",
+        vendedor: "@Musica_old",
+        imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_601717-MLA76176408369_052024-F.webp",
+        descripcion: "CD con más de 30 canciones de los años 60 y 70 interpretadas por Adrián Otero, líder de Memphis La Blusera, y la banda Los Neo Beat."
+      },
+      {
+        cprod: 3,
+        nombre: "Harry Potter School Box",
+        categoria: "Colección",
+        marca: "Pyramid",
+        precio: 150000,
+        stock: 1,
+        estado: "Usado",
+        vendedor: "@Coleccion_store",
+        imagen: "https://i.ebayimg.com/images/g/uR4AAOSwFsVkMFcP/s-l1600.webp",
+        descripcion: "Lonchera de Harry Potter del año 2001 en perfecto estado, pensada para coleccionistas."
+      },
+      {
+        cprod: 4,
+        nombre: "Muñeca Candy Candy en vestido de novia",
+        categoria: "Anime/Series animadas",
+        marca: "Polistil",
+        precio: 120000,
+        stock: 2,
+        estado: "Nuevo",
+        vendedor: "@retro_games",
+        imagen: "https://www.lulu-berlu.com/upload/image/candy-doll---mint-in-box-bride-dress-p-image-234500-grande.jpg",
+        descripcion: "Muñeca Candy Candy de 26,3 cm, material plástico, origen Italia, año 1979."
+      },
+      {
+        cprod: 5,
+        nombre: "Lote de 17 Mini Juegos y Llaveros Vintage Años 90",
+        categoria: "Videojuegos",
+        marca: "Basic Fun",
+        precio: 100000,
+        stock: 1,
+        estado: "Nuevo",
+        vendedor: "@coleccionables_ar",
+        imagen: "https://i.ebayimg.com/images/g/N9sAAOSw0QlgEIX2/s-l1600.webp",
+        descripcion: "Lote de mini juegos y llaveros vintage de los años 90. Artículo nuevo, sin usar y sin abrir."
+      },
+      {
+        cprod: 6,
+        nombre: "Llaveros Retro de Disney",
+        categoria: "Llavero",
+        marca: "Disney",
+        precio: 7000,
+        stock: 12,
+        estado: "Usado",
+        vendedor: "@pixel_shop",
+        imagen: "https://i.etsystatic.com/31616279/r/il/61a171/6270501596/il_570xN.6270501596_bi95.jpg",
+        descripcion: "Llaveros retro de Disney en condiciones variables. Artículos nostálgicos de colección, no recomendados como juguetes para niños."
+      }
+    ];
+
+    let carrito = [];
+
+    function mostrarProductos(lista) {
+      const contenedor = document.getElementById("listaProductos");
+      contenedor.innerHTML = "";
+
+      lista.forEach(producto => {
+        contenedor.innerHTML += `
+          <div class="producto">
+            <img src="${producto.imagen}" alt="${producto.nombre}">
+            <h3>${producto.nombre}</h3>
+            <p><strong>Categoría:</strong> ${producto.categoria}</p>
+            <p><strong>Marca:</strong> ${producto.marca}</p>
+            <p><strong>Precio:</strong> $${producto.precio}</p>
+            <p><strong>Stock:</strong> ${producto.stock}</p>
+            <p><strong>Estado:</strong> ${producto.estado}</p>
+            <p><strong>Vendedor:</strong> ${producto.vendedor}</p>
+            <div class="descripcion">${producto.descripcion}</div>
+
+            <div class="botones">
+              <button onclick="verDetalle(${producto.cprod})">Ver detalle</button>
+              <button onclick="agregarCarrito(${producto.cprod})">Agregar al carrito</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function filtrarProductos(categoria) {
+      if (categoria === "Todos") {
+        mostrarProductos(productos);
+      } else {
+        const filtrados = productos.filter(producto => producto.categoria === categoria);
+        mostrarProductos(filtrados);
+      }
+    }
+
+    function verDetalle(cprod) {
+      const producto = productos.find(p => p.cprod === cprod);
+
+      document.getElementById("detalleProducto").innerHTML = `
+        <h2>${producto.nombre}</h2>
+        <br>
+        <p><strong>Código:</strong> ${producto.cprod}</p>
+        <p><strong>Categoría:</strong> ${producto.categoria}</p>
+        <p><strong>Marca:</strong> ${producto.marca}</p>
+        <p><strong>Precio:</strong> $${producto.precio}</p>
+        <p><strong>Stock disponible:</strong> ${producto.stock}</p>
+        <p><strong>Estado:</strong> ${producto.estado}</p>
+        <p><strong>Vendedor:</strong> ${producto.vendedor}</p>
+        <br>
+        <p>${producto.descripcion}</p>
+      `;
+
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function cerrarModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function agregarCarrito(cprod) {
+      const producto = productos.find(p => p.cprod === cprod);
+      carrito.push(producto);
+      actualizarCarrito();
+      alert("Producto agregado al carrito: " + producto.nombre);
+    }
+
+    function actualizarCarrito() {
+      const contenedor = document.getElementById("itemsCarrito");
+      const total = document.getElementById("totalCarrito");
+
+      if (carrito.length === 0) {
+        contenedor.innerHTML = "<p>El carrito está vacío.</p>";
+        total.textContent = "Total: $0";
+        return;
+      }
+
+      contenedor.innerHTML = "";
+
+      carrito.forEach((producto, index) => {
+        contenedor.innerHTML += `
+          <div class="item-carrito">
+            <span>${producto.nombre}</span>
+            <span>$${producto.precio}</span>
+            <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
+          </div>
+        `;
+      });
+
+      const suma = carrito.reduce((acum, producto) => acum + producto.precio, 0);
+      total.textContent = "Total: $" + suma;
+    }
+
+    function eliminarDelCarrito(index) {
+      carrito.splice(index, 1);
+      actualizarCarrito();
+    }
+
+    function vaciarCarrito() {
+      carrito = [];
+      actualizarCarrito();
+    }
+
+    mostrarProductos(productos);
+  </script>
+
+</body>
+</html>
