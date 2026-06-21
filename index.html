@@ -6,401 +6,431 @@
   <title>RetroVerse</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+    :root{
+      --paper:#f4dfbd;
+      --paper-2:#e9c99c;
+      --ink:#3d4235;
+      --ink-2:#5a503d;
+      --aqua:#7fa99a;
+      --aqua-dark:#55766d;
+      --brown:#7a5638;
+      --brown-dark:#40281a;
+      --cream:#fff0cf;
+      --red:#a34d34;
+      --shadow:#b58558;
     }
 
     body {
       font-family: Georgia, 'Times New Roman', serif;
-      background: #f3e4cf;
-      color: #3b2416;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.45), transparent 22%),
+        radial-gradient(circle at 80% 25%, rgba(127,169,154,.18), transparent 24%),
+        linear-gradient(135deg, var(--paper), #efd3a7 55%, #dfb981);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    body::before{
+      content:"";
+      position: fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.2;
+      background-image:
+        linear-gradient(rgba(61,66,53,.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,66,53,.12) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mix-blend-mode:multiply;
     }
 
     header {
-      background: linear-gradient(135deg, #4b2e1f, #8b5e3c);
-      color: #fff4df;
-      padding: 35px 20px;
+      min-height: 290px;
+      padding: 35px 20px 25px;
       text-align: center;
-      border-bottom: 6px double #d4a373;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 10px double var(--aqua-dark);
+      background:
+        linear-gradient(180deg, rgba(255,242,210,.95), rgba(239,205,160,.9)),
+        repeating-linear-gradient(-8deg, transparent 0 22px, rgba(64,40,26,.06) 22px 24px);
+    }
+
+    header::before,
+    header::after{
+      content:"RETRO • VINTAGE • COLLECTIBLES • GAMING • ANIME";
+      position:absolute;
+      left:-20px;
+      right:-20px;
+      font-size:12px;
+      letter-spacing:8px;
+      color:rgba(61,66,53,.45);
+      white-space:nowrap;
+      font-weight:bold;
+    }
+    header::before{ top:18px; }
+    header::after{ bottom:18px; }
+
+    .brand-row{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-top:25px;
     }
 
     header h1 {
-      font-size: 48px;
-      letter-spacing: 4px;
-      text-shadow: 3px 3px #2a160d;
+      font-size: clamp(54px, 10vw, 128px);
+      line-height:.9;
+      letter-spacing: 13px;
+      color: var(--ink);
+      font-weight: 900;
+      text-shadow: 5px 5px 0 rgba(127,169,154,.28);
+      font-style: italic;
+      text-transform: uppercase;
+    }
+
+    .est-box{
+      border:6px solid var(--aqua);
+      color:#fff3d4;
+      background:var(--aqua);
+      padding:8px 10px;
+      font-size:23px;
+      line-height:1;
+      font-weight:bold;
+      box-shadow:5px 5px 0 rgba(61,66,53,.25);
     }
 
     header p {
-      max-width: 800px;
-      margin: 15px auto 0;
-      font-size: 18px;
+      display:inline-block;
+      margin-top: 18px;
+      padding:8px 18px;
+      border-top:5px solid var(--aqua);
+      border-bottom:5px solid var(--aqua);
+      font-size: clamp(14px, 2vw, 19px);
       line-height: 1.5;
+      max-width: 920px;
+      color: var(--ink-2);
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-weight:bold;
     }
 
     nav {
-      background: #6f4e37;
-      padding: 14px;
+      background: var(--brown-dark);
+      padding: 12px;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 10;
+      border-bottom:4px solid var(--aqua);
+      box-shadow:0 8px 18px rgba(0,0,0,.25);
     }
 
-    nav a {
-      color: #fff4df;
+    nav a, nav button {
+      color: var(--cream);
       text-decoration: none;
-      margin: 0 14px;
+      margin: 6px 8px;
       font-weight: bold;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      background:transparent;
+      border:2px solid transparent;
+      font-family: inherit;
+      font-size:15px;
+      cursor:pointer;
+      padding:9px 13px;
     }
 
-    nav a:hover {
-      color: #ffd28f;
+    nav a:hover, nav button:hover {
+      border-color: var(--aqua);
+      color: #ffe0a0;
+      background:rgba(255,255,255,.06);
     }
 
-    section {
-      padding: 45px 8%;
-    }
+    section { padding: 48px 7%; position:relative; }
 
     .titulo {
       text-align: center;
-      font-size: 32px;
+      font-size: clamp(30px, 5vw, 54px);
       margin-bottom: 25px;
-      color: #4b2e1f;
+      color: var(--ink);
+      text-transform:uppercase;
+      letter-spacing:5px;
+      text-shadow:3px 3px 0 rgba(127,169,154,.25);
     }
 
     .inicio {
-      background: #ead2b7;
-      text-align: center;
-      border-bottom: 4px solid #c89f72;
+      padding-top: 42px;
     }
 
-    .inicio-card {
-      background: #fff8ed;
-      padding: 30px;
-      border-radius: 18px;
-      border: 3px solid #8b5e3c;
-      box-shadow: 8px 8px 0 #c89f72;
-      max-width: 900px;
-      margin: auto;
+    .intro-strip{
+      max-width:1100px;
+      margin:0 auto 34px;
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .intro-main, .sale-stamp{
+      background:rgba(255,240,207,.8);
+      border:4px solid var(--ink);
+      box-shadow:9px 9px 0 var(--shadow);
+      padding:22px;
+    }
+
+    .intro-main p{
+      font-size:18px;
+      line-height:1.6;
+    }
+
+    .sale-stamp{
+      min-width:190px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      color:var(--cream);
+      background:var(--red);
+      transform:rotate(2deg);
+    }
+
+    .sale-stamp strong{
+      font-size:38px;
+      display:block;
+      line-height:1;
     }
 
     .filtros {
       text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .filtros button {
-      margin: 6px;
+      margin-bottom: 28px;
     }
 
     button {
-      background: #8b5e3c;
-      color: #fff4df;
-      border: none;
+      background: var(--aqua-dark);
+      color: var(--cream);
+      border: 3px solid var(--ink);
       padding: 10px 16px;
-      border-radius: 10px;
+      border-radius: 0;
       cursor: pointer;
       font-weight: bold;
       transition: 0.2s;
+      box-shadow:4px 4px 0 var(--ink);
+      font-family: Georgia, 'Times New Roman', serif;
+      text-transform:uppercase;
+      letter-spacing:1px;
     }
 
     button:hover {
-      background: #4b2e1f;
-      transform: scale(1.04);
+      background: var(--brown);
+      transform: translate(-2px, -2px);
+      box-shadow:6px 6px 0 var(--ink);
     }
 
     .productos {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
+      gap: 25px;
+      max-width:1250px;
+      margin:0 auto;
     }
 
     .producto {
-      background: #fff8ed;
-      border: 3px solid #8b5e3c;
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 7px 7px 0 #c89f72;
-      transition: 0.3s;
+      background: var(--cream);
+      border: 4px solid var(--ink);
+      padding: 14px;
+      box-shadow: 10px 10px 0 var(--shadow);
+      transition: 0.25s;
+      position:relative;
+      overflow:hidden;
+      min-height: 520px;
     }
 
-    .producto:hover {
-      transform: translateY(-6px);
+    .producto::before{
+      content:"VINTAGE FIND";
+      position:absolute;
+      top:14px;
+      left:-45px;
+      background:var(--red);
+      color:var(--cream);
+      font-weight:bold;
+      padding:5px 48px;
+      transform:rotate(-35deg);
+      font-size:11px;
+      letter-spacing:1px;
+      z-index:2;
     }
+
+    .producto:hover { transform: translateY(-7px) rotate(-.4deg); }
 
     .producto img {
       width: 100%;
-      height: 180px;
+      height: 190px;
       object-fit: cover;
-      border-radius: 14px;
-      border: 3px solid #c89f72;
-      margin-bottom: 12px;
+      border: 4px solid var(--aqua-dark);
+      margin-bottom: 14px;
+      filter: sepia(.18) saturate(.92);
+      background:#dec69e;
     }
 
     .producto h3 {
-      color: #4b2e1f;
+      color: var(--ink);
       margin-bottom: 8px;
+      font-size:22px;
+      text-transform:uppercase;
+      line-height:1.05;
     }
 
-    .producto p {
-      margin: 5px 0;
-      font-size: 15px;
+    .producto p { margin: 5px 0; font-size: 15px; }
+
+    .precio-tag{
+      display:inline-block;
+      background:var(--aqua);
+      color:var(--cream);
+      padding:5px 10px;
+      border:2px solid var(--ink);
+      font-size:20px;
+      font-weight:bold;
+      margin:8px 0;
+      transform:rotate(-1deg);
     }
 
     .descripcion {
       background: #ead2b7;
       padding: 10px;
-      border-left: 5px solid #8b5e3c;
+      border-left: 7px solid var(--red);
       margin: 10px 0;
-      border-radius: 8px;
+      font-size:14px;
+      min-height:65px;
     }
 
-    .botones {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
+    .botones { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
 
-    .carrito {
-      background: #ead2b7;
-    }
+    .carrito { background: rgba(127,169,154,.22); border-top:6px double var(--aqua-dark); }
 
-    .carrito-box, .registro-box, .ayuda-box {
+    .carrito-box {
       max-width: 900px;
       margin: auto;
-      background: #fff8ed;
-      border: 3px solid #8b5e3c;
-      border-radius: 18px;
+      background: var(--cream);
+      border: 4px solid var(--ink);
       padding: 25px;
-      box-shadow: 7px 7px 0 #c89f72;
+      box-shadow: 10px 10px 0 var(--shadow);
     }
 
     .item-carrito {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items:center;
       background: #ead2b7;
       padding: 12px;
-      border-radius: 10px;
       margin-bottom: 10px;
+      border:2px solid rgba(61,66,53,.45);
     }
 
-    .total {
-      text-align: right;
-      font-size: 22px;
-      font-weight: bold;
-      margin-top: 15px;
-      color: #4b2e1f;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    th, td {
-      border: 2px solid #8b5e3c;
-      padding: 12px;
-      text-align: left;
-    }
-
-    th {
-      background: #8b5e3c;
-      color: #fff4df;
-    }
-
-    td {
-      background: #fff8ed;
-    }
-
-    .ayuda-box ol {
-      padding-left: 25px;
-      line-height: 1.8;
-    }
+    .total { text-align: right; font-size: 24px; font-weight: bold; margin-top: 15px; color: var(--brown-dark); }
 
     footer {
-      background: #4b2e1f;
-      color: #fff4df;
+      background: var(--brown-dark);
+      color: var(--cream);
       text-align: center;
-      padding: 18px;
-      margin-top: 30px;
+      padding: 20px;
+      border-top:6px double var(--aqua);
     }
 
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.65);
+      background: rgba(0,0,0,0.7);
       justify-content: center;
       align-items: center;
       z-index: 100;
+      padding:20px;
     }
 
     .modal-contenido {
-      background: #fff8ed;
-      color: #3b2416;
+      background: var(--cream);
+      color: var(--ink);
       padding: 25px;
-      border-radius: 18px;
-      border: 4px solid #8b5e3c;
-      max-width: 450px;
-      width: 90%;
-      box-shadow: 8px 8px 0 #c89f72;
+      border: 5px solid var(--ink);
+      max-width: 560px;
+      width: 92%;
+      max-height:88vh;
+      overflow:auto;
+      box-shadow: 12px 12px 0 var(--shadow);
     }
 
-    .cerrar {
-      float: right;
-      font-size: 25px;
-      cursor: pointer;
-      font-weight: bold;
+    .cerrar { float: right; font-size: 28px; cursor: pointer; font-weight: bold; }
+
+    .help-list{
+      margin-top:18px;
+      padding-left:25px;
+      line-height:1.85;
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 34px;
-      }
+    .help-list li{ margin-bottom:8px; }
 
-      nav a {
-        display: block;
-        margin: 8px 0;
-      }
-
-      table {
-        font-size: 13px;
-      }
+    @media (max-width: 760px) {
+      .intro-strip{ grid-template-columns:1fr; }
+      .sale-stamp{ min-width:0; }
+      .item-carrito{ grid-template-columns:1fr; }
+      header h1{ letter-spacing:5px; }
     }
   </style>
 </head>
 
 <body>
-
-  <header>
-    <h1>RetroVerse</h1>
-    <p>
-      RetroVerse es una aplicación de e-commerce dedicada a la compra y venta de objetos retro y de colección.
-      Permite explorar productos coleccionables, accesorios temáticos y merchandising especial.
-    </p>
+  <header id="inicio">
+    <div class="brand-row">
+      <h1>RetroVerse</h1>
+      <div class="est-box">EST<br>2026</div>
+    </div>
+    <p>Vintage style collectibles · anime · videojuegos · objetos retro</p>
   </header>
 
   <nav>
     <a href="#inicio">Inicio</a>
-    <a href="#catalogo">Catálogo</a>
+    <a href="#catalogo">Productos</a>
     <a href="#carrito">Carrito</a>
-    <a href="#registro">Registro</a>
-    <a href="#ayuda">Ayuda</a>
+    <button onclick="abrirAyuda()">Ayuda</button>
   </nav>
 
-  <section id="inicio" class="inicio">
-    <div class="inicio-card">
-      <h2 class="titulo">Bienvenido a RetroVerse</h2>
-      <p>
-        Explorá productos vintage relacionados con anime, videojuegos, tecnología retro
-        y objetos de colección. Una tienda para los coleccionistas de corazon.
-      </p>
+  <section id="catalogo" class="inicio">
+    <div class="intro-strip">
+      <div class="intro-main">
+        <h2>Objetos con historia</h2>
+        <p>Explorá una colección de productos retro, coleccionables, consolas, música, muñecas vintage y piezas nostálgicas. Elegí una categoría, mirá el detalle y armá tu carrito.</p>
+      </div>
+      <div class="sale-stamp">
+        <span>BIG</span>
+        <strong>RETRO</strong>
+        <span>SALE</span>
+      </div>
     </div>
-  </section>
 
-  <section id="catalogo">
-    <h2 class="titulo">Catálogo de Productos</h2>
+    <h2 class="titulo">Catálogo</h2>
 
     <div class="filtros">
       <button onclick="filtrarProductos('Todos')">Todos</button>
-      <button onclick="filtrarProductos('Anime')">Anime</button>
-      <button onclick="filtrarProductos('Videojuegos')">Videojuegos</button>
-      <button onclick="filtrarProductos('Colección')">Colección</button>
+      <button onclick="filtrarProductos('Consola')">Consolas</button>
+      <button onclick="filtrarProductos('CD/DVD')">CD/DVD</button>
+      <button onclick="filtrarProductos('Figuras/muñecas')">Muñecas</button>
+      <button onclick="filtrarProductos('Llavero')">Llaveros</button>
+      <button onclick="filtrarProductos('Lunchbox')">Lunchbox</button>
     </div>
 
     <div class="productos" id="listaProductos"></div>
   </section>
 
   <section id="carrito" class="carrito">
-    <h2 class="titulo">Carrito de Compras</h2>
-
+    <h2 class="titulo">Carrito</h2>
     <div class="carrito-box">
-      <div id="itemsCarrito">
-        <p>El carrito está vacío.</p>
-      </div>
-
+      <div id="itemsCarrito"><p>El carrito está vacío.</p></div>
       <p class="total" id="totalCarrito">Total: $0</p>
       <button onclick="vaciarCarrito()">Vaciar carrito</button>
-    </div>
-  </section>
-
-  <section id="registro">
-    <h2 class="titulo">Diseño del Registro Principal</h2>
-
-    <div class="registro-box">
-      <h3>Registro principal: RegVintage</h3>
-
-      <table>
-        <tr>
-          <th>Campo</th>
-          <th>Tipo</th>
-          <th>Descripción</th>
-        </tr>
-        <tr>
-          <td>Cprod</td>
-          <td>Entero</td>
-          <td>Código único del producto. Clave primaria.</td>
-        </tr>
-        <tr>
-          <td>Nombprod</td>
-          <td>AN(50)</td>
-          <td>Nombre del producto.</td>
-        </tr>
-        <tr>
-          <td>Categ</td>
-          <td>AN(30)</td>
-          <td>Categoría del producto.</td>
-        </tr>
-        <tr>
-          <td>Marca</td>
-          <td>AN(30)</td>
-          <td>Marca del producto.</td>
-        </tr>
-        <tr>
-          <td>Precio</td>
-          <td>Real</td>
-          <td>Precio de venta.</td>
-        </tr>
-        <tr>
-          <td>Stock</td>
-          <td>Entero</td>
-          <td>Cantidad disponible.</td>
-        </tr>
-        <tr>
-          <td>Estado</td>
-          <td>AN(20)</td>
-          <td>Estado del producto.</td>
-        </tr>
-        <tr>
-          <td>Vendedor</td>
-          <td>AN(50)</td>
-          <td>Usuario o nombre del vendedor.</td>
-        </tr>
-      </table>
-      <p style="margin-top: 18px; line-height: 1.6;">
-        <strong>Clave del registro:</strong> Cprod. Se eligió este campo porque identifica de manera única cada producto dentro de RetroVerse. Aunque dos productos puedan tener nombres parecidos, cada uno tendrá un código distinto, lo que permite buscar, modificar o eliminar registros sin confusiones.
-      </p>
-
-    </div>
-  </section>
-
-  <section id="ayuda">
-    <h2 class="titulo">Ayuda / Tutorial</h2>
-
-    <div class="ayuda-box">
-      <ol>
-        <li><strong>Explorar productos:</strong> ingresá al catálogo y mirá las tarjetas disponibles.</li>
-        <li><strong>Filtrar productos:</strong> usá los botones Anime, Videojuegos o Colección.</li>
-        <li><strong>Ver detalles:</strong> presioná “Ver detalle” para abrir información ampliada del producto.</li>
-        <li><strong>Agregar al carrito:</strong> presioná “Agregar al carrito” para sumar un producto a la compra.</li>
-        <li><strong>Revisar carrito:</strong> entrá a la sección Carrito para ver productos agregados y total.</li>
-        <li><strong>Ver registro:</strong> en Registro se muestra el diseño del registro principal RegVintage.</li>
-      </ol>
     </div>
   </section>
 
@@ -415,79 +445,93 @@
     </div>
   </div>
 
+  <div class="modal" id="modalAyuda">
+    <div class="modal-contenido">
+      <span class="cerrar" onclick="cerrarAyuda()">×</span>
+      <h2>Ayuda / Tutorial</h2>
+      <ol class="help-list">
+        <li><strong>Explorar productos:</strong> mirá las tarjetas del catálogo.</li>
+        <li><strong>Filtrar productos:</strong> usá los botones para ver solo una categoría.</li>
+        <li><strong>Ver detalles:</strong> presioná “Ver detalle” para abrir información ampliada.</li>
+        <li><strong>Agregar al carrito:</strong> presioná “Agregar al carrito” para sumar un producto.</li>
+        <li><strong>Revisar carrito:</strong> entrá a la sección Carrito para ver productos agregados y el total.</li>
+      </ol>
+    </div>
+  </div>
+
   <script>
     const productos = [
       {
         cprod: 1,
         nombre: "Atari 7800 + Lote de 40 juegos",
-        categoria: "Videojuegos",
+        categoria: "Consola",
         marca: "Atari",
         precio: 450000,
         stock: 1,
         estado: "Usado",
         vendedor: "@Gamer_retro",
         imagen: "https://i.ebayimg.com/images/g/qzwAAOSwDphhcGHW/s-l1600.webp",
-        descripcion: "Consola Atari 7800 con desgaste, rasguños y suciedad. Incluye 40 juegos probados, con etiquetas desgastadas, y 2 joysticks con señales de uso."
+        descripcion: "Consola Atari 7800 con desgaste, rasguños y suciedad. Incluye 40 juegos probados, etiquetas desgastadas y 2 joysticks con desgaste."
       },
       {
         cprod: 2,
         nombre: "Soundtrack de Isidoro: La película",
-        categoria: "Colección",
+        categoria: "CD/DVD",
         marca: "Leader Music",
         precio: 78000,
         stock: 2,
         estado: "Nuevo",
         vendedor: "@Musica_old",
         imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_601717-MLA76176408369_052024-F.webp",
-        descripcion: "CD con más de 30 canciones de los años 60 y 70 interpretadas por Adrián Otero, líder de Memphis La Blusera, y la banda Los Neo Beat."
+        descripcion: "Incluye más de 30 grandes canciones de los años 60 y 70 interpretadas por Adrián Otero, líder de Memphis La Blusera."
       },
       {
         cprod: 3,
         nombre: "Harry Potter School Box",
-        categoria: "Colección",
+        categoria: "Lunchbox",
         marca: "Pyramid",
         precio: 150000,
         stock: 1,
         estado: "Usado",
         vendedor: "@Coleccion_store",
         imagen: "https://i.ebayimg.com/images/g/uR4AAOSwFsVkMFcP/s-l1600.webp",
-        descripcion: "Lonchera de Harry Potter del año 2001 en perfecto estado, pensada para coleccionistas."
+        descripcion: "Lonchera de Harry Potter del año 2001 en muy buen estado. Ideal para coleccionistas."
       },
       {
         cprod: 4,
         nombre: "Muñeca Candy Candy en vestido de novia",
-        categoria: "Anime",
+        categoria: "Figuras/muñecas",
         marca: "Polistil",
         precio: 120000,
         stock: 2,
         estado: "Nuevo",
         vendedor: "@retro_games",
         imagen: "https://www.lulu-berlu.com/upload/image/candy-doll---mint-in-box-bride-dress-p-image-234500-grande.jpg",
-        descripcion: "Muñeca Candy Candy de 26,3 cm, material plástico, origen Italia, año 1979."
+        descripcion: "Muñeca de 26,3 cm, material plástico, año 1979, origen Italia."
       },
       {
         cprod: 5,
         nombre: "Lote de 17 Mini Juegos y Llaveros Vintage Años 90",
-        categoria: "Videojuegos",
+        categoria: "Llavero",
         marca: "Basic Fun",
         precio: 100000,
         stock: 1,
         estado: "Nuevo",
         vendedor: "@coleccionables_ar",
         imagen: "https://i.ebayimg.com/images/g/N9sAAOSw0QlgEIX2/s-l1600.webp",
-        descripcion: "Lote de mini juegos y llaveros vintage de los años 90. Artículo nuevo, sin usar y sin abrir."
+        descripcion: "Artículo nuevo, sin usar y sin abrir. Lote especial para fans de juguetes retro."
       },
       {
         cprod: 6,
         nombre: "Llaveros Retro de Disney",
-        categoria: "Colección",
+        categoria: "Llavero",
         marca: "Disney",
         precio: 7000,
         stock: 12,
         estado: "Usado",
         vendedor: "@pixel_shop",
         imagen: "https://i.etsystatic.com/31616279/r/il/61a171/6270501596/il_570xN.6270501596_bi95.jpg",
-        descripcion: "Llaveros retro de Disney en condiciones variables. Artículos nostálgicos de colección, no recomendados como juguetes para niños."
+        descripcion: "Llaveros nostálgicos de Disney. Condición variable, vendidos como artículos de colección para adultos."
       }
     ];
 
@@ -496,7 +540,6 @@
     function mostrarProductos(lista) {
       const contenedor = document.getElementById("listaProductos");
       contenedor.innerHTML = "";
-
       lista.forEach(producto => {
         contenedor.innerHTML += `
           <div class="producto">
@@ -504,12 +547,11 @@
             <h3>${producto.nombre}</h3>
             <p><strong>Categoría:</strong> ${producto.categoria}</p>
             <p><strong>Marca:</strong> ${producto.marca}</p>
-            <p><strong>Precio:</strong> $${producto.precio}</p>
+            <span class="precio-tag">$${producto.precio}</span>
             <p><strong>Stock:</strong> ${producto.stock}</p>
             <p><strong>Estado:</strong> ${producto.estado}</p>
             <p><strong>Vendedor:</strong> ${producto.vendedor}</p>
             <div class="descripcion">${producto.descripcion}</div>
-
             <div class="botones">
               <button onclick="verDetalle(${producto.cprod})">Ver detalle</button>
               <button onclick="agregarCarrito(${producto.cprod})">Agregar al carrito</button>
@@ -520,37 +562,29 @@
     }
 
     function filtrarProductos(categoria) {
-      if (categoria === "Todos") {
-        mostrarProductos(productos);
-      } else {
-        const filtrados = productos.filter(producto => producto.categoria === categoria);
-        mostrarProductos(filtrados);
-      }
+      if (categoria === "Todos") mostrarProductos(productos);
+      else mostrarProductos(productos.filter(producto => producto.categoria === categoria));
     }
 
     function verDetalle(cprod) {
       const producto = productos.find(p => p.cprod === cprod);
-
       document.getElementById("detalleProducto").innerHTML = `
-        <h2>${producto.nombre}</h2>
-        <br>
+        <h2>${producto.nombre}</h2><br>
         <p><strong>Código:</strong> ${producto.cprod}</p>
         <p><strong>Categoría:</strong> ${producto.categoria}</p>
         <p><strong>Marca:</strong> ${producto.marca}</p>
         <p><strong>Precio:</strong> $${producto.precio}</p>
         <p><strong>Stock disponible:</strong> ${producto.stock}</p>
         <p><strong>Estado:</strong> ${producto.estado}</p>
-        <p><strong>Vendedor:</strong> ${producto.vendedor}</p>
-        <br>
+        <p><strong>Vendedor:</strong> ${producto.vendedor}</p><br>
         <p>${producto.descripcion}</p>
       `;
-
       document.getElementById("modal").style.display = "flex";
     }
 
-    function cerrarModal() {
-      document.getElementById("modal").style.display = "none";
-    }
+    function cerrarModal() { document.getElementById("modal").style.display = "none"; }
+    function abrirAyuda() { document.getElementById("modalAyuda").style.display = "flex"; }
+    function cerrarAyuda() { document.getElementById("modalAyuda").style.display = "none"; }
 
     function agregarCarrito(cprod) {
       const producto = productos.find(p => p.cprod === cprod);
@@ -562,15 +596,12 @@
     function actualizarCarrito() {
       const contenedor = document.getElementById("itemsCarrito");
       const total = document.getElementById("totalCarrito");
-
       if (carrito.length === 0) {
         contenedor.innerHTML = "<p>El carrito está vacío.</p>";
         total.textContent = "Total: $0";
         return;
       }
-
       contenedor.innerHTML = "";
-
       carrito.forEach((producto, index) => {
         contenedor.innerHTML += `
           <div class="item-carrito">
@@ -580,23 +611,21 @@
           </div>
         `;
       });
-
       const suma = carrito.reduce((acum, producto) => acum + producto.precio, 0);
       total.textContent = "Total: $" + suma;
     }
 
-    function eliminarDelCarrito(index) {
-      carrito.splice(index, 1);
-      actualizarCarrito();
-    }
+    function eliminarDelCarrito(index) { carrito.splice(index, 1); actualizarCarrito(); }
+    function vaciarCarrito() { carrito = []; actualizarCarrito(); }
 
-    function vaciarCarrito() {
-      carrito = [];
-      actualizarCarrito();
+    window.onclick = function(event) {
+      const modal = document.getElementById("modal");
+      const modalAyuda = document.getElementById("modalAyuda");
+      if (event.target === modal) cerrarModal();
+      if (event.target === modalAyuda) cerrarAyuda();
     }
 
     mostrarProductos(productos);
   </script>
-
 </body>
 </html>
